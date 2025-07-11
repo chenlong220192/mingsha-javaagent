@@ -1,0 +1,49 @@
+# mingsha-javaagent-methodtime 配置文件（YAML 版）
+# =====================================
+# 采集相关配置
+collector:
+  # 采集包范围，支持通配符（如 com.example.*），多个用逗号分隔。仅增强这些包下的方法。
+  packages: "com.example.*"
+  # 采样率，1.0为全量采集，0.5为50%采样，取值范围0~1。
+  samplingRate: 1.0
+  # 最小采集耗时阈值（纳秒），低于该值的方法不采集，建议100000（0.1ms）起步。
+  minDurationNs: 100000
+  # 内存缓冲队列容量，单位：条，决定高峰期最大缓存量。
+  queueCapacity: 10000
+
+# 存储相关配置
+storage:
+  # 批量写入数据库的条数，越大写入效率越高但延迟略增。
+  batchSize: 500
+  # 写入失败转存本地文件的阈值（缓冲区剩余容量），防止数据丢失。
+  failoverThreshold: 2000
+  # 数据留存天数，定期清理过期数据，单位：天。
+  retentionDays: 7
+  # 数据留存最大条数，超量自动清理，单位：条。
+  retentionRows: 1000000
+  # 慢查询阈值（纳秒），超过该值的方法会被记录到慢查询表，默认1000000（1ms）。
+  slowQueryThresholdNs: 1000000
+  h2:
+    # H2 数据库文件路径，必须配置，无默认值！建议使用绝对路径或项目内相对路径。
+    path: "mem:mingsha_javaagent_method_time_h2_db"
+
+# 管理端口配置
+manage:
+  telnet:
+    # Telnet 管理端口，支持自动端口切换。
+    port: 5005
+    # Telnet 最大线程数，限制并发管理连接数。
+    maxThreads: 1
+
+# 监控与熔断配置
+monitor:
+  cpu:
+    # CPU 熔断阈值，单位：百分比，超限暂停采集。
+    fuseThreshold: 80
+  # 健康检查间隔，单位：毫秒，建议5000~10000。
+  healthCheckIntervalMs: 5000
+
+# 日志配置
+log:
+  # 日志级别，支持 INFO/DEBUG/ERROR。
+  level: INFO 
