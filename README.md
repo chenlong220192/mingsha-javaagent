@@ -153,8 +153,6 @@ git push origin feature/your-feature-name
 
 <div align="center">
 
-**如果这个项目对您有帮助，请给我们一个 ⭐️**
-
-Made with ❤️ by [Mingsha Team](https://github.com/mingsha)
+**如果这个项目对您有帮助，请给一个 ⭐️**
 
 </div>
