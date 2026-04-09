@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.1"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.1 https://maven.apache.org/xsd/assembly-2.1.1.xsd">
+
+    <!--
+        打包说明：
+        1. 子项目先执行 mvn package -pl 子项目 -am 构建制品
+        2. assembly 模块执行 mvn package -pl assembly
+           传入参数：-Dmodule.path=mingsha-javaagent-methodtime -Dmodule.artifactId=mingsha-javaagent-methodtime -Dmodule.name=mingsha-javaagent-methodtime
+        3. 制品输出到根目录 target/{module.name}-{version}.tar.gz 和 .zip
+        4. 解压后会生成 {module.name}-{version}/ 目录
+
+        打包内容：
+        - 总项目 README.md
+        - 子项目的 README.md、docs 目录
+        - 子项目的 jar、sources.jar、javadoc.jar
+    -->
+
+    <!-- 打包格式：tar.gz 和 zip -->
+    <formats>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+
+    <!-- 解压后生成根目录 -->
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <baseDirectory>${module.name}-${project.parent.version}</baseDirectory>
+    <id>${module.name}</id>
+
+    <!-- 组件文件 -->
+    <fileSets>
+        <!-- 子项目的 README.md -->
+        <fileSet>
+            <directory>${project.basedir}/../${module.path}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>README.md</include>
+            </includes>
+            <useDefaultExcludes>true</useDefaultExcludes>
+        </fileSet>
+
+        <!-- 子项目的 docs 目录 -->
+        <fileSet>
+            <directory>${project.basedir}/../${module.path}/docs</directory>
+            <outputDirectory>/docs</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <useDefaultExcludes>true</useDefaultExcludes>
+        </fileSet>
+    </fileSets>
+
+    <!-- 工件文件（jar包等） -->
+    <files>
+        <!-- 子项目的 jar -->
+        <file>
+            <source>${project.basedir}/../${module.path}/target/${module.artifactId}-${project.version}.jar</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <!-- 源码 jar -->
+        <file>
+            <source>${project.basedir}/../${module.path}/target/${module.artifactId}-${project.version}-sources.jar</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <!-- javadoc jar -->
+        <file>
+            <source>${project.basedir}/../${module.path}/target/${module.artifactId}-${project.version}-javadoc.jar</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+    </files>
+
+</assembly>

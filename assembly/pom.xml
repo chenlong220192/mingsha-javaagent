@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>site.mingsha.javaagent.methodtime</groupId>
+        <artifactId>mingsha-javaagent</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>assembly</artifactId>
+    <packaging>pom</packaging>
+
+    <name>assembly</name>
+    <description>
+        Assembly module for building distribution packages.
+        Builds .zip and .tar.gz archives containing:
+        - JAR artifacts from subprojects
+        - Source JARs
+        - Javadoc JARs
+        - README.md files
+        - docs directories
+
+        Usage:
+        1. Build subprojects first: mvn package -pl &lt;subproject&gt; -am
+        2. Run assembly:
+           mvn package -pl mingsha-javaagent-assembly \
+             -Dmodule.path=&lt;subproject-dir&gt; \
+             -Dmodule.artifactId=&lt;subproject-artifactId&gt; \
+             -Dmodule.name=&lt;subproject-name&gt;
+        3. Find artifacts in root target/ directory
+    </description>
+
+    <properties>
+        <assembly.maven.plugin.version>3.7.0</assembly.maven.plugin.version>
+        <!-- 默认值，可以通过命令行覆盖 -->
+        <module.path>mingsha-javaagent-methodtime</module.path>
+        <module.artifactId>mingsha-javaagent-methodtime</module.artifactId>
+        <module.name>mingsha-javaagent-methodtime</module.name>
+    </properties>
+
+    <dependencies>
+        <!-- 依赖各个子项目，用于打包 -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mingsha-javaagent-methodtime</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Assembly Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${assembly.maven.plugin.version}</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/resources/assembly/distribution.xml</descriptor>
+                    </descriptors>
+                    <!-- 制品输出到根目录 target -->
+                    <outputDirectory>${project.parent.basedir}/target</outputDirectory>
+                    <!-- 最终文件名: {module.name}-{version} -->
+                    <finalName>${module.name}-${project.parent.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <assemblyName>${module.name}-${project.parent.version}</assemblyName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -94,10 +94,22 @@ clean: ## ${CLEAN} 清理构建文件
 package: ## ${PACKAGE} 构建安装包
 	@printf "${PACKAGE} ${GREEN}开始打包...${RESET}\n"
 	@if [ "$(SKIP_TEST)" = "true" ]; then \
-		$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end --update-snapshots -f ${BASE_PATH}/pom.xml clean package -D maven.test.skip=true; \
+		$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end --update-snapshots -f ${BASE_PATH}/pom.xml clean package -D maven.test.skip=true -D checkstyle.skip=true -D jacoco.skip=true; \
 	else \
 		$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end --update-snapshots -f ${BASE_PATH}/pom.xml clean package; \
 	fi
+	@printf "${PACKAGE} ${GREEN}构建 distribution 包...${RESET}\n"
+	@modules=$$($(BASE_PATH)/mvnw -q -f ${BASE_PATH}/pom.xml help:evaluate -Dexpression=distribution.modules -DforceStdout 2>/dev/null | tr ',' ' '); \
+	for module in $$modules; do \
+		if [ -n "$$module" ] && [ "$$module" != "null" ]; then \
+			$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end -f ${BASE_PATH}/pom.xml install -pl $$module -am -D maven.test.skip=true -D checkstyle.skip=true -D jacoco.skip=true 2>/dev/null || true; \
+			$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end -f ${BASE_PATH}/pom.xml package -pl assembly \
+				-Dmodule.path=$$module \
+				-Dmodule.artifactId=$$module \
+				-Dmodule.name=$$module \
+				-D maven.test.skip=true -D checkstyle.skip=true -D jacoco.skip=true; \
+		fi; \
+	done
 
 # test: 运行单元测试
 test: ## ${TEST} 运行单元测试
@@ -132,3 +144,15 @@ ci: ## ${SUCCESS} CI流程：检查+测试+打包
 	$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end --update-snapshots -f ${BASE_PATH}/pom.xml checkstyle:check
 	$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end --update-snapshots -f ${BASE_PATH}/pom.xml test
 	$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end --update-snapshots -f ${BASE_PATH}/pom.xml clean package -D maven.test.skip=true
+	@printf "${PACKAGE} ${GREEN}构建 distribution 包...${RESET}\n"
+	@modules=$$($(BASE_PATH)/mvnw -q -f ${BASE_PATH}/pom.xml help:evaluate -Dexpression=distribution.modules -DforceStdout 2>/dev/null | tr ',' ' '); \
+	for module in $$modules; do \
+		if [ -n "$$module" ] && [ "$$module" != "null" ]; then \
+			$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end -f ${BASE_PATH}/pom.xml install -pl $$module -am -D maven.test.skip=true -D checkstyle.skip=true -D jacoco.skip=true 2>/dev/null || true; \
+			$(BASE_PATH)/mvnw --batch-mode --errors --fail-at-end -f ${BASE_PATH}/pom.xml package -pl assembly \
+				-Dmodule.path=$$module \
+				-Dmodule.artifactId=$$module \
+				-Dmodule.name=$$module \
+				-D maven.test.skip=true -D checkstyle.skip=true -D jacoco.skip=true; \
+		fi; \
+	done

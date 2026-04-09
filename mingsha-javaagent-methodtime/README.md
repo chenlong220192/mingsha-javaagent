@@ -61,12 +61,12 @@ make package
 
 ### 2. 启动应用（默认配置）
 ```bash
-java -javaagent:target/mingsha-javaagent-methodtime-0.0.1-SNAPSHOT.jar -jar your-app.jar
+java -javaagent:target/mingsha-javaagent-methodtime-2026.04.09.jar -jar your-app.jar
 ```
 
 ### 3. 启动应用（自定义配置）
 ```bash
-java -javaagent:target/mingsha-javaagent-methodtime-0.0.1-SNAPSHOT.jar \
+java -javaagent:target/mingsha-javaagent-methodtime-2026.04.09.jar \
      -Dmingsha.agent.config.collector.packages="com.myapp.* "\
      -Dmingsha.agent.config.collector.samplingRate=0.5 \
      -Dmingsha.agent.config.storage.h2.path="./my_app_db" \

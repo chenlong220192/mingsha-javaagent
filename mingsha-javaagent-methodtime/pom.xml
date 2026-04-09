@@ -16,20 +16,20 @@
     <description>Java agent for method time profiling with H2 and Telnet management</description>
 
     <properties>
-        <asm.version>9.5</asm.version>
+        <asm.version>9.7</asm.version>
         <h2.version>2.2.224</h2.version>
-        <junit.jupiter.version>5.10.2</junit.jupiter.version>
-        <snakeyaml.version>2.2</snakeyaml.version>
-        <maven.jar.plugin.version>3.2.2</maven.jar.plugin.version>
-        <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
-        <maven.javadoc.plugin.version>3.6.3</maven.javadoc.plugin.version>
-        <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
-        <maven.failsafe.plugin.version>3.2.5</maven.failsafe.plugin.version>
-        <jacoco.version>0.8.11</jacoco.version>
+        <junit.jupiter.version>5.11.4</junit.jupiter.version>
+        <snakeyaml.version>2.3</snakeyaml.version>
+        <maven.jar.plugin.version>3.4.1</maven.jar.plugin.version>
+        <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
+        <maven.javadoc.plugin.version>3.11.2</maven.javadoc.plugin.version>
+        <maven.surefire.plugin.version>3.5.2</maven.surefire.plugin.version>
+        <maven.failsafe.plugin.version>3.5.2</maven.failsafe.plugin.version>
+        <jacoco.version>0.8.12</jacoco.version>
         <jmh.version>1.37</jmh.version>
-        <testcontainers.version>1.19.3</testcontainers.version>
-        <awaitility.version>4.2.0</awaitility.version>
-        <mockito.core.version>4.11.0</mockito.core.version>
+        <testcontainers.version>1.20.2</testcontainers.version>
+        <awaitility.version>4.2.2</awaitility.version>
+        <mockito.core.version>5.14.2</mockito.core.version>
     </properties>
 
     <dependencies>

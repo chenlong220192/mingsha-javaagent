@@ -14,14 +14,16 @@
 
 	<properties>
 			<!--  -->
-			<revision>0.0.1-SNAPSHOT</revision>
+			<revision>2026.04.09</revision>
 			<flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
-			<!-- checkstyle -->
 			<checkstyle-maven-plugin.version>3.6.0</checkstyle-maven-plugin.version>
+			<!-- 需要打包的子模块列表（逗号分隔），新增子模块时添加到这里 -->
+			<distribution.modules>mingsha-javaagent-methodtime</distribution.modules>
 	</properties>
 
 	<modules>
 			<module>mingsha-javaagent-methodtime</module>
+			<module>assembly</module>
 	</modules>
 
 	<build>

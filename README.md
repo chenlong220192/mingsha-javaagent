@@ -4,155 +4,155 @@
 [![Maven Central](https://img.shields.io/maven-central/v/site.mingsha.javaagent.methodtime/mingsha-javaagent.svg)](https://search.maven.org/artifact/site.mingsha.javaagent.methodtime/mingsha-javaagent)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/mingsha/mingsha-javaagent)
 
-> 基于 Java Agent 技术的应用监控与诊断工具集，提供轻量级、高性能的运行时监控能力。
+> Lightweight and high-performance runtime monitoring toolkit based on Java Agent technology for Java applications.
 
-## 📖 简介
+## Overview
 
-Mingsha Java Agent 是一个基于 Java Agent 技术的应用监控与诊断工具集，专注于为 Java 应用提供轻量级、高性能的运行时监控能力。通过字节码增强技术，实现对应用性能、故障诊断、安全防护等多维度的监控和干预。
+Mingsha Java Agent is a monitoring and diagnostic toolkit based on Java Agent technology, focused on providing lightweight and high-performance runtime monitoring capabilities for Java applications. Through bytecode enhancement technology, it enables multi-dimensional monitoring and intervention of application performance, fault diagnosis, and security protection.
 
-### 🎯 设计理念
+### Design Philosophy
 
-- **轻量级**: 最小化对应用性能的影响，生产环境友好
-- **高性能**: 优化的字节码增强算法，低延迟数据收集
-- **易扩展**: 模块化设计，支持功能插件化扩展
-- **生产就绪**: 经过生产环境验证，稳定可靠
+- **Lightweight**: Minimizes impact on application performance, production-friendly
+- **High Performance**: Optimized bytecode enhancement algorithms with low-latency data collection
+- **Easy to Extend**: Modular design with plugin-based extensibility
+- **Production Ready**: Validated in production environments, stable and reliable
 
-## ✨ 功能特性
+## Features
 
-### 🔍 性能监控
-- **方法执行时间统计**: 精确统计方法调用耗时，识别性能瓶颈
-- **内存分配跟踪**: 监控对象创建和内存使用模式
-- **CPU热点分析**: 识别计算密集型热点方法
-- **线程状态监控**: 实时监控线程状态和死锁检测
-- **垃圾回收分析**: GC停顿时间和频率统计
+### Performance Monitoring
+- **Method Execution Time Statistics**: Accurate method call duration tracking to identify performance bottlenecks
+- **Memory Allocation Tracking**: Monitor object creation and memory usage patterns
+- **CPU Hotspot Analysis**: Identify compute-intensive hotspot methods
+- **Thread State Monitoring**: Real-time thread state monitoring and deadlock detection
+- **Garbage Collection Analysis**: GC pause time and frequency statistics
 
-### 🛠️ 故障诊断
-- **异常捕获统计**: 自动收集异常信息和堆栈
-- **慢查询追踪**: SQL执行时间监控和优化建议
-- **死锁检测**: 自动识别线程死锁情况
-- **内存泄漏追踪**: 对象引用链分析和泄漏检测
-- **资源泄露检测**: 文件句柄、网络连接等资源监控
+### Fault Diagnosis
+- **Exception Capture Statistics**: Automatically collect exception information and stack traces
+- **Slow Query Tracking**: SQL execution time monitoring and optimization suggestions
+- **Deadlock Detection**: Automatic thread deadlock identification
+- **Memory Leak Tracking**: Object reference chain analysis and leak detection
+- **Resource Leak Detection**: File handles, network connections monitoring
 
-### 🔧 代码级干预
-- **代码热替换**: 支持运行时代码修改和Bug修复
-- **AOP植入**: 无侵入式功能增强和横切关注点处理
-- **故障注入**: 混沌工程测试和容错能力验证
-- **动态日志级别调整**: 生产环境日志级别动态控制
-- **流量录制回放**: 请求响应数据录制和回放
+### Code-Level Intervention
+- **Code Hot Replacement**: Runtime code modification and bug fix support
+- **AOP Injection**: Non-invasive feature enhancement and cross-cutting concerns handling
+- **Fault Injection**: Chaos engineering testing and fault tolerance verification
+- **Dynamic Log Level Adjustment**: Production environment log level dynamic control
+- **Traffic Recording and Replay**: Request/response data recording and replay
 
-### 🛡️ 安全防护
-- **RASP防护**: 运行时应用安全防护
-- **敏感操作审计**: 文件、网络操作监控和审计
-- **反序列化防护**: 反序列化漏洞攻击防护
-- **SQL注入检测**: SQL注入攻击实时检测
-- **加密密钥监控**: 密钥使用和泄露检测
+### Security Protection
+- **RASP Protection**: Runtime Application Self-Protection
+- **Sensitive Operation Auditing**: File and network operation monitoring and auditing
+- **Deserialization Protection**: Deserialization vulnerability attack protection
+- **SQL Injection Detection**: Real-time SQL injection attack detection
+- **Encryption Key Monitoring**: Key usage and leak detection
 
-### 📊 可观测性增强
-- **分布式追踪**: 全链路调用追踪和性能分析
-- **指标暴露**: Prometheus集成和监控告警
-- **日志上下文注入**: 自动关联日志和请求追踪
-- **拓扑依赖发现**: 服务依赖关系自动发现
-- **配置动态生效**: 运行时配置热更新
+### Observability Enhancement
+- **Distributed Tracing**: Full链路 call tracing and performance analysis
+- **Metrics Exposure**: Prometheus integration and monitoring alerts
+- **Log Context Injection**: Automatic log and request correlation
+- **Topology Dependency Discovery**: Service dependency automatic discovery
+- **Configuration Dynamic Refresh**: Runtime configuration hot update
 
-### ⚡ 资源优化
-- **连接池监控**: 数据库连接池使用情况监控
-- **缓存命中率统计**: 缓存策略优化和失效分析
-- **类加载分析**: 类加载性能优化和冲突解决
-- **对象池优化**: 对象复用和内存分配优化
-- **文件IO监控**: 文件读写性能分析和优化
+### Resource Optimization
+- **Connection Pool Monitoring**: Database connection pool usage monitoring
+- **Cache Hit Rate Statistics**: Cache strategy optimization and invalidation analysis
+- **Class Loading Analysis**: Class loading performance optimization and conflict resolution
+- **Object Pool Optimization**: Object reuse and memory allocation optimization
+- **File IO Monitoring**: File read/write performance analysis and optimization
 
-## 🏗️ 技术栈
+## Technology Stack
 
-### 核心技术
-- **Java Agent**: JVM字节码增强技术
-- **ASM**: 字节码操作框架
-- **H2 Database**: 轻量级嵌入式数据库
-- **Telnet**: 远程管理接口
-- **Maven**: 项目构建和依赖管理
+### Core Technologies
+- **Java Agent**: JVM bytecode enhancement technology
+- **ASM**: Bytecode manipulation framework
+- **H2 Database**: Lightweight embedded database
+- **Telnet**: Remote management interface
+- **Maven**: Project build and dependency management
 
-### 监控技术
-- **JMX**: Java管理扩展
-- **JVM TI**: JVM工具接口
-- **字节码注入**: 运行时方法增强
-- **采样统计**: 性能数据收集
+### Monitoring Technologies
+- **JMX**: Java Management Extensions
+- **JVM TI**: JVM Tool Interface
+- **Bytecode Injection**: Runtime method enhancement
+- **Sampling Statistics**: Performance data collection
 
-### 开发工具
-- **Checkstyle**: 代码风格检查
-- **JUnit**: 单元测试框架
-- **Make**: 构建自动化
-- **Git**: 版本控制
+### Development Tools
+- **Checkstyle**: Code style checking
+- **JUnit**: Unit testing framework
+- **Make**: Build automation
+- **Git**: Version control
 
-## 📚 文档导航
+## Documentation
 
-### 📖 技术文档
-- [Java Agent 功能全景分类表](docs/Java%20Agent%20功能全景分类表.md) - Java Agent 技术全景分类和选型指南
+### Technical Documentation
+- [Java Agent Feature Overview](docs/Java%20Agent%20功能全景分类表.md) - Java Agent technology overview and selection guide
 
-### 🔧 模块文档
-- [MethodTime 模块文档](mingsha-javaagent-methodtime/README.md) - 方法执行时间监控模块详细文档
+### Module Documentation
+- [MethodTime Module Documentation](mingsha-javaagent-methodtime/README.md) - Method execution time monitoring module
 
-## 🤝 贡献指南
+## Contributing
 
-### 开发环境搭建
+### Development Environment Setup
 
-1. **Fork 项目**
+1. **Fork the project**
 ```bash
 git clone https://github.com/chenlong220192/mingsha-javaagent.git
 cd mingsha-javaagent
 ```
 
-2. **创建特性分支**
+2. **Create a feature branch**
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
-3. **提交代码**
+3. **Commit code**
 ```bash
 git add .
 git commit -m "feat: add your feature description"
 git push origin feature/your-feature-name
 ```
 
-### 代码规范
+### Code Standards
 
-- 遵循 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
-- 使用 Checkstyle 进行代码风格检查
-- 提交信息遵循 [Conventional Commits](https://www.conventionalcommits.org/) 规范
+- Follow [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+- Use Checkstyle for code style verification
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 
-### 测试要求
+### Testing Requirements
 
-- 新增功能必须包含单元测试
-- 测试覆盖率不低于 80%
-- 所有测试必须通过
+- New features must include unit tests
+- Test coverage must be at least 80%
+- All tests must pass
 
-### 提交 Pull Request
+### Submitting Pull Request
 
-1. 确保代码通过所有检查
-2. 更新相关文档
-3. 添加测试用例
-4. 提交 Pull Request 并描述变更内容
+1. Ensure code passes all checks
+2. Update relevant documentation
+3. Add test cases
+4. Submit Pull Request with change description
 
-## 🆘 技术支持
+## Support
 
-### 问题反馈
+### Issue Reporting
 
-- **GitHub Issues**: [提交 Issue](https://github.com/chenlong220192/mingsha-javaagent/issues)
-- **邮件支持**: chenlong220192@gmail.com
-- **文档反馈**: 欢迎提交文档改进建议
+- **GitHub Issues**: [Submit Issue](https://github.com/chenlong220192/mingsha-javaagent/issues)
+- **Email Support**: chenlong220192@gmail.com
+- **Documentation Feedback**: Documentation improvement suggestions welcome
 
-### 社区交流
+### Community Discussion
 
-- **GitHub Discussions**: [参与讨论](https://github.com/chenlong220192/mingsha-javaagent/discussions)
+- **GitHub Discussions**: [Join Discussion](https://github.com/chenlong220192/mingsha-javaagent/discussions)
 
 ---
 
-## 📄 许可证
+## License
 
-本项目采用 [MIT License](./LICENSE) 许可证。
+This project is licensed under [MIT License](./LICENSE).
 
 ---
 
 <div align="center">
 
-**如果这个项目对您有帮助，请给一个 ⭐️**
+**If this project is helpful to you, please give it a ⭐️**
 
 </div>
